@@ -1,0 +1,1706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ben Whittaker – Job Redesign &amp; Analysis</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600;700&display=swap');
+
+  :root {
+    --navy: #1a2744;
+    --gold: #c9a84c;
+    --cream: #f9f5ee;
+    --coral: #e07b5a;
+    --teal: #2d7d8c;
+    --text: #2c2c2c;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    font-size: 14px;
+  }
+
+  /* ══════════ COVER ══════════ */
+  .cover {
+    background: var(--navy);
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 60px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cover::before {
+    content: '';
+    position: absolute;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    border: 2px solid rgba(201,168,76,0.15);
+    top: -150px; left: -150px;
+  }
+  .cover::after {
+    content: '';
+    position: absolute;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    border: 2px solid rgba(201,168,76,0.1);
+    bottom: -100px; right: -100px;
+  }
+
+  .cover-badge {
+    background: var(--gold);
+    color: var(--navy);
+    padding: 6px 20px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cover h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 8vw, 56px);
+    line-height: 1.1;
+    margin-bottom: 12px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cover h1 span { color: var(--gold); }
+
+  .cover-subtitle {
+    font-size: clamp(13px, 3vw, 16px);
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 40px;
+    letter-spacing: 1px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .briefcase-icon {
+    font-size: clamp(52px, 12vw, 72px);
+    margin-bottom: 20px;
+    filter: drop-shadow(0 4px 16px rgba(201,168,76,0.3));
+    position: relative;
+    z-index: 1;
+  }
+
+  .cover-meta {
+    display: flex;
+    gap: 28px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cover-meta-item { text-align: center; }
+
+  .cover-meta-item .val {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(20px, 5vw, 28px);
+    color: var(--gold);
+    display: block;
+  }
+
+  .cover-meta-item .lbl {
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+  }
+
+  .cover-film-note {
+    color: rgba(255,255,255,0.25);
+    font-size: 12px;
+    margin-top: 36px;
+    letter-spacing: 1px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ══════════ SECTIONS ══════════ */
+  section {
+    padding: 60px 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  @media (min-width: 640px) {
+    section { padding: 80px 40px; }
+  }
+
+  @media (min-width: 1024px) {
+    section { padding: 80px 60px; }
+  }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(24px, 5vw, 36px);
+    color: var(--navy);
+    margin-bottom: 32px;
+    border-bottom: 3px solid var(--gold);
+    padding-bottom: 12px;
+    display: inline-block;
+    max-width: 100%;
+  }
+
+  /* ══════════ INSIGHT CALLOUT ══════════ */
+  .insight-callout {
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin-bottom: 28px;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    font-size: 13px;
+    line-height: 1.75;
+    background: #e8f4f8;
+    border-left: 4px solid var(--teal);
+  }
+
+  .insight-callout-icon { font-size: 22px; flex-shrink: 0; margin-top: 2px; }
+  .insight-callout strong { color: var(--navy); }
+
+  /* ══════════ PERSONA CARD ══════════ */
+  .persona-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.1);
+  }
+
+  @media (min-width: 768px) {
+    .persona-grid { grid-template-columns: 260px 1fr; }
+  }
+
+  .persona-left {
+    background: var(--navy);
+    color: white;
+    padding: 32px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .avatar {
+    width: 90px; height: 90px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold), #f0d080);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 40px;
+    margin-bottom: 16px;
+    box-shadow: 0 4px 20px rgba(201,168,76,0.4);
+  }
+
+  .persona-left h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    margin-bottom: 4px;
+  }
+
+  .persona-left .role-tag {
+    background: rgba(201,168,76,0.2);
+    color: var(--gold);
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+  }
+
+  .persona-stat {
+    width: 100%;
+    background: rgba(255,255,255,0.06);
+    border-radius: 8px;
+    padding: 9px 12px;
+    margin-bottom: 7px;
+    text-align: left;
+  }
+
+  .persona-stat .s-label { font-size: 10px; color: rgba(255,255,255,0.45); text-transform: uppercase; letter-spacing: 1px; }
+  .persona-stat .s-val { font-size: 13px; font-weight: 600; color: white; }
+
+  .persona-right { padding: 28px 24px; }
+
+  @media (min-width: 640px) {
+    .persona-right { padding: 36px; }
+  }
+
+  .quote-block {
+    background: linear-gradient(135deg, #f0f4ff, #e8f4f8);
+    border-left: 4px solid var(--gold);
+    padding: 18px 20px;
+    border-radius: 0 12px 12px 0;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--navy);
+    margin-bottom: 24px;
+    line-height: 1.7;
+  }
+
+  .tags-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  .tag {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+
+  .tag-blue { background: #e8f0fe; color: var(--navy); }
+  .tag-gold { background: #fef3e2; color: #a0681a; }
+  .tag-coral { background: #fde8e3; color: #c0442a; }
+  .tag-teal { background: #e0f4f6; color: var(--teal); }
+
+  /* ══════════ 3-COL COMPARISON GRID ══════════ */
+  .three-col-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  @media (min-width: 768px) {
+    .three-col-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  .col-card {
+    background: white;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  }
+
+  .col-card-header {
+    padding: 14px 18px;
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+  }
+
+  .col-card-body {
+    padding: 18px;
+    font-size: 13px;
+    color: #555;
+    line-height: 1.8;
+  }
+
+  /* ══════════ TIMELINE ══════════ */
+  .timeline {
+    position: relative;
+    padding-left: 40px;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 12px; top: 0; bottom: 0;
+    width: 3px;
+    background: linear-gradient(to bottom, var(--gold), var(--teal));
+    border-radius: 2px;
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 28px;
+    background: white;
+    border-radius: 12px;
+    padding: 18px 20px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+    border-left: 3px solid transparent;
+  }
+
+  .timeline-item:nth-child(1) { border-left-color: var(--coral); }
+  .timeline-item:nth-child(2) { border-left-color: var(--gold); }
+  .timeline-item:nth-child(3) { border-left-color: var(--teal); }
+  .timeline-item:nth-child(4) { border-left-color: var(--navy); }
+
+  .timeline-dot {
+    position: absolute;
+    left: -50px; top: 18px;
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px;
+    color: white;
+    font-weight: 700;
+    z-index: 2;
+  }
+
+  .dot-coral { background: var(--coral); }
+  .dot-gold  { background: var(--gold); }
+  .dot-teal  { background: var(--teal); }
+  .dot-navy  { background: var(--navy); }
+
+  .tl-year  { font-size: 11px; color: #999; margin-bottom: 3px; letter-spacing: 1px; }
+  .tl-title { font-size: 16px; font-weight: 700; color: var(--navy); }
+  .tl-desc  { font-size: 13px; color: #666; margin-top: 6px; line-height: 1.65; }
+
+  /* ══════════ ROLE ARCHITECTURE ══════════ */
+  .role-arch {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .arch-node {
+    background: var(--navy);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 13px;
+    text-align: center;
+    box-shadow: 0 4px 16px rgba(26,39,68,0.3);
+  }
+
+  .arch-node.top {
+    background: linear-gradient(135deg, var(--navy), var(--teal));
+    font-size: 15px;
+    padding: 16px 32px;
+    border: 3px solid var(--gold);
+  }
+
+  .arch-connector {
+    width: 3px;
+    height: 28px;
+    background: var(--gold);
+  }
+
+  .arch-row {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .arch-branch {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .arch-node.pillar {
+    background: var(--teal);
+    font-size: 12px;
+    padding: 10px 16px;
+    min-width: 130px;
+  }
+
+  .arch-sub-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 8px;
+  }
+
+  .arch-chip {
+    background: white;
+    border: 1.5px solid var(--teal);
+    color: var(--teal);
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+
+  /* ══════════ JOB DESIGN CARDS ══════════ */
+  .job-design-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+
+  @media (min-width: 640px) {
+    .job-design-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (min-width: 1024px) {
+    .job-design-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  .jd-card {
+    background: white;
+    border-radius: 14px;
+    padding: 22px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+    border-top: 4px solid var(--gold);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .jd-card::after {
+    content: attr(data-icon);
+    position: absolute;
+    right: 14px; bottom: 10px;
+    font-size: 36px;
+    opacity: 0.08;
+  }
+
+  .jd-card h3 {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+
+  .jd-card p, .jd-card li {
+    font-size: 13px;
+    color: #555;
+    line-height: 1.7;
+  }
+
+  .jd-card ul { padding-left: 16px; }
+
+  /* ══════════ BEFORE / AFTER ══════════ */
+  .ba-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  @media (min-width: 768px) {
+    .ba-grid {
+      grid-template-columns: 1fr 48px 1fr;
+      gap: 0;
+      align-items: stretch;
+    }
+  }
+
+  .ba-col {
+    background: white;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  }
+
+  .ba-header {
+    padding: 14px 18px;
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+  }
+
+  .ba-before .ba-header { background: #fde8e3; color: #c0442a; }
+  .ba-after  .ba-header { background: #e3fbe7; color: #1a7a30; }
+
+  .ba-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 11px 18px;
+    border-bottom: 1px solid #f5f5f5;
+    font-size: 13px;
+    color: #444;
+    line-height: 1.5;
+  }
+
+  .ba-row:last-child { border-bottom: none; }
+  .ba-row .icon { flex-shrink: 0; font-size: 14px; margin-top: 2px; }
+
+  .ba-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    color: var(--gold);
+    font-weight: 700;
+    padding: 12px 0;
+  }
+
+  @media (min-width: 768px) {
+    .ba-arrow { padding: 0; }
+  }
+
+  /* ══════════ KSA MATRIX ══════════ */
+  .ksa-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.1);
+  }
+
+  @media (min-width: 768px) {
+    .ksa-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  .ksa-col { padding: 0; }
+
+  .ksa-header {
+    padding: 18px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .ksa-col:nth-child(1) .ksa-header { background: var(--navy); color: var(--gold); }
+  .ksa-col:nth-child(2) .ksa-header { background: var(--teal); color: white; }
+  .ksa-col:nth-child(3) .ksa-header { background: var(--coral); color: white; }
+
+  .ksa-item {
+    padding: 12px 18px;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 13px;
+    background: white;
+    line-height: 1.5;
+  }
+
+  .ksa-item:last-child { border-bottom: none; }
+
+  .ksa-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 5px;
+  }
+
+  .dot-k { background: var(--navy); }
+  .dot-s { background: var(--teal); }
+  .dot-a { background: var(--coral); }
+
+  /* ══════════ CONDITIONS / GENERIC TABLE ══════════ */
+  .data-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  }
+
+  .data-table th {
+    background: var(--navy);
+    color: var(--gold);
+    padding: 13px 16px;
+    text-align: left;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+  }
+
+  .data-table td {
+    background: white;
+    padding: 13px 16px;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 13px;
+    color: #444;
+    vertical-align: top;
+    line-height: 1.5;
+  }
+
+  .data-table tr:last-child td { border-bottom: none; }
+  .data-table tr:nth-child(even) td { background: #fafafa; }
+
+  /* Scrollable wrapper for tables on mobile */
+  .table-wrap {
+    overflow-x: auto;
+    border-radius: 14px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .pill {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .pill-green { background: #e3fbe7; color: #1a7a30; }
+  .pill-amber { background: #fff4e0; color: #a06010; }
+  .pill-blue  { background: #e6eeff; color: #2244aa; }
+  .pill-coral { background: #fde8e3; color: #c0442a; }
+
+  /* ══════════ RADAR + BARS ══════════ */
+  .radar-wrapper {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+    align-items: center;
+  }
+
+  @media (min-width: 768px) {
+    .radar-wrapper { grid-template-columns: 1fr 1fr; }
+  }
+
+  .radar-svg-wrap { display: flex; justify-content: center; }
+
+  .competency-bars { display: flex; flex-direction: column; gap: 13px; }
+
+  .comp-bar-row { display: flex; flex-direction: column; gap: 4px; }
+
+  .comp-bar-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--navy);
+    gap: 8px;
+  }
+
+  .comp-bar-track { height: 10px; background: #eee; border-radius: 6px; overflow: hidden; }
+
+  .comp-bar-fill {
+    height: 100%;
+    border-radius: 6px;
+    background: linear-gradient(90deg, var(--teal), var(--gold));
+  }
+
+  /* ══════════ METRICS BOARD ══════════ */
+  .metrics-board {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin-bottom: 36px;
+  }
+
+  @media (min-width: 768px) {
+    .metrics-board { grid-template-columns: repeat(4, 1fr); }
+  }
+
+  .metric-card {
+    background: white;
+    border-radius: 14px;
+    padding: 20px 16px;
+    text-align: center;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .metric-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 4px;
+  }
+
+  .metric-card:nth-child(1)::before { background: var(--coral); }
+  .metric-card:nth-child(2)::before { background: var(--gold); }
+  .metric-card:nth-child(3)::before { background: var(--teal); }
+  .metric-card:nth-child(4)::before { background: var(--navy); }
+
+  .metric-icon  { font-size: 26px; margin-bottom: 6px; }
+  .metric-val   { font-family: 'Playfair Display', serif; font-size: 26px; color: var(--navy); font-weight: 700; }
+  .metric-label { font-size: 11px; color: #888; margin-top: 4px; text-transform: uppercase; letter-spacing: 1px; }
+
+  /* ══════════ SCHEDULE ══════════ */
+  .schedule {
+    display: grid;
+    grid-template-columns: 72px 1fr;
+    background: white;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  }
+
+  .sch-time {
+    background: var(--navy);
+    color: var(--gold);
+    padding: 12px 6px;
+    font-size: 11px;
+    font-weight: 700;
+    text-align: center;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .sch-task {
+    padding: 12px 16px;
+    border-bottom: 1px solid #f0f0f0;
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 8px;
+    font-size: 13px;
+    color: #444;
+    line-height: 1.5;
+  }
+
+  .sch-task:last-child, .sch-time:last-child { border-bottom: none; }
+
+  .sch-badge {
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+
+  /* ══════════ TWO-COL GRID ══════════ */
+  .two-col-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  @media (min-width: 768px) {
+    .two-col-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  .two-col-grid.span-last > *:last-child {
+    grid-column: 1 / -1;
+  }
+
+  /* ══════════ INSIGHT CARDS (closing section) ══════════ */
+  .insight-card {
+    border-radius: 16px;
+    padding: 32px;
+    position: relative;
+    overflow: hidden;
+    color: white;
+  }
+
+  .insight-card-eyebrow {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0.6;
+    margin-bottom: 10px;
+  }
+
+  .insight-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 19px;
+    margin-bottom: 12px;
+    line-height: 1.3;
+  }
+
+  .insight-card p {
+    font-size: 13px;
+    line-height: 1.8;
+    opacity: 0.82;
+  }
+
+  .insight-card-bg {
+    position: absolute;
+    right: -20px; top: -20px;
+    font-size: 90px;
+    opacity: 0.06;
+  }
+
+  /* ══════════ COMP TABLE ══════════ */
+  .comp-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  }
+
+  .comp-table th {
+    background: linear-gradient(90deg, var(--navy), var(--teal));
+    color: white;
+    padding: 13px 16px;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    text-align: left;
+  }
+
+  .comp-table td {
+    background: white;
+    padding: 13px 16px;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 13px;
+    color: #444;
+    vertical-align: top;
+    line-height: 1.5;
+  }
+
+  .comp-table tr:nth-child(even) td { background: #f8fbfc; }
+  .comp-table tr:last-child td { border-bottom: none; }
+
+  .highlighted-row td {
+    background: #fffbf0 !important;
+    font-weight: 600;
+    color: var(--navy) !important;
+  }
+
+  /* ══════════ FOOTER ══════════ */
+  .doc-footer {
+    background: var(--navy);
+    color: rgba(255,255,255,0.5);
+    text-align: center;
+    padding: 28px 20px;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    line-height: 1.8;
+  }
+
+  .doc-footer strong { color: var(--gold); }
+
+  /* ══════════ DIVIDER ══════════ */
+  .section-divider {
+    height: 4px;
+    background: linear-gradient(90deg, var(--navy), var(--teal), var(--gold));
+    opacity: 0.15;
+    margin: 0;
+  }
+  /* Circle */
+.circle-container {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    overflow: hidden; /* IMPORTANT */
+    box-shadow: 0 0 40px rgba(255, 215, 100, 0.4);
+}
+
+/* Image fills circle */
+.circle-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Makes image fill properly */
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .circle-container {
+        width: 180px;
+        height: 180px;
+    }
+
+    .inner-imag {
+        width: 45px;
+        height: 45px;
+    }
+}
+
+@media (max-width: 480px) {
+    .circle-container {
+        width: 140px;
+        height: 140px;
+    }
+
+    .inner-imag {
+        width: 35px;
+        height: 35px;
+    }
+}
+.avatar {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    overflow: hidden; /* Important - keeps image inside circle */
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+}
+
+.avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Makes image fill circle properly */
+    display: block;
+}
+@media (max-width: 768px) {
+    .avatar {
+        width: 180px;
+        height: 180px;
+    }
+}
+
+@media (max-width: 480px) {
+    .avatar {
+        width: 140px;
+        height: 140px;
+    }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════ COVER ═══════════════════════════════ -->
+<div class="cover">
+  <div class="cover-badge">Job Redesign &amp; Analysis</div>
+  <div class="circle-container">
+    <img src="hrm.jpg" alt="Icon" class="inner-imag">
+</div>
+  <h1>Ben <span>Whittaker</span></h1>
+  <div class="cover-subtitle">Senior Experience Catalyst · About The Fit, Inc. · New York City</div>
+  <div class="cover-meta">
+    <div class="cover-meta-item"><span class="val">70</span><span class="lbl">Age</span></div>
+    <div class="cover-meta-item"><span class="val">40+</span><span class="lbl">Years Experience</span></div>
+    <div class="cover-meta-item"><span class="val">VP</span><span class="lbl">Former Role</span></div>
+    <div class="cover-meta-item"><span class="val">Intern</span><span class="lbl">Current Title</span></div>
+    <div class="cover-meta-item"><span class="val">2015</span><span class="lbl">Film Year</span></div>
+  </div>
+  <p class="cover-film-note">Based on the motion picture "The Intern" · Warner Bros. Pictures</p>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ═══════════════════ SECTION 1 – WHO IS BEN ═══════════════════ -->
+<section>
+  <div class="section-label">Section 01</div>
+  <div class="section-title">Who Is Ben Whittaker?</div>
+
+  <div class="insight-callout">
+    <div class="insight-callout-icon">💡</div>
+    <div><strong>The Core Paradox:</strong> Ben's story is a live case study of what happens when an organisation's HRM scope is too narrow to recognise non-traditional talent. About The Fit creates a "Senior Intern" program that, on paper, looks progressive. But by treating it as a social goodwill exercise rather than a strategic HR decision, the company almost wastes one of its most valuable human assets. Is HRM being used to truly serve people and organisations, or just to check boxes?</div>
+  </div>
+
+  <div class="persona-grid">
+    <div class="persona-left">
+      <div class="avatar"><img src="hrm.jpg"></div>
+      <h2>Ben Whittaker</h2>
+      <div class="role-tag">Senior Intern → Redesigned</div>
+      <div class="persona-stat"><div class="s-label">Age</div><div class="s-val">70 years old</div></div>
+      <div class="persona-stat"><div class="s-label">Education</div><div class="s-val">Northwestern University</div></div>
+      <div class="persona-stat"><div class="s-label">Previous Role</div><div class="s-val">VP, Phone Directory Co.</div></div>
+      <div class="persona-stat"><div class="s-label">Tenure</div><div class="s-val">40+ years in business</div></div>
+      <div class="persona-stat"><div class="s-label">Status</div><div class="s-val">Widower, Retired, Re-entering</div></div>
+      <div class="persona-stat"><div class="s-label">Company</div><div class="s-val">About The Fit, Inc. (e-commerce)</div></div>
+    </div>
+    <div class="persona-right">
+      <div class="quote-block">
+        "I'm not just here to help. I'm here because I still have something to contribute and more importantly, something to learn."
+        <br><br><em>Ben Whittaker, Day 1</em>
+      </div>
+      <p style="font-size:13px; color:#555; line-height:1.8; margin-bottom:14px;">
+        Ben Whittaker is a 70-year-old retired executive who re-enters the workforce through a senior intern program at a fast-growing e-commerce startup. A product of the Mad Men era — punctual, suited, briefcase-toting — he initially appears to be a fish out of water among hoodie-wearing millennials. But what unfolds is a masterclass in <strong>reverse mentorship</strong>, <strong>institutional wisdom</strong>, and the raw human power of showing up, listening hard, and caring deeply.
+      </p>
+      <p style="font-size:13px; color:#555; line-height:1.8; margin-bottom:14px;">Ben's current title, "Senior Intern," is a glorified placeholder. It captures none of his actual value to the organisation. This document redesigns his role from scratch.</p>
+      <div class="tags-row">
+        <span class="tag tag-blue">Emotional Intelligence</span>
+        <span class="tag tag-gold">Institutional Knowledge</span>
+        <span class="tag tag-teal">Reverse Mentorship</span>
+        <span class="tag tag-coral">Cross-Gen Bridge</span>
+        <span class="tag tag-blue">Operational Wisdom</span>
+        <span class="tag tag-gold">Work Ethic</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ SECTION 2 – HRM vs SHRM vs PERSONNEL ═══════════════════ -->
+<section style="padding-top:0">
+  <div class="section-label">Section 02</div>
+  <div class="section-title">HRM vs SHRM vs Personnel Management: Ben as a Test Case</div>
+
+  <div class="insight-callout">
+    <div class="insight-callout-icon">🔍</div>
+    <div><strong>Three Lenses, One Person:</strong> Personnel Management, HRM, and Strategic HRM would each treat Ben very differently. The approach shifts from reactive to proactive to strategic as we move across the spectrum — and the difference between them determines whether Ben's 40 years of experience get used or wasted.</div>
+  </div>
+
+  <div class="three-col-grid">
+    <div class="col-card">
+      <div class="col-card-header" style="background:#6c6c6c; color:white;">📁 Personnel Management</div>
+      <div class="col-card-body">
+        <p style="font-weight:700; color:var(--navy); margin-bottom:10px;">How it sees Ben:</p>
+        <p>A temporary hire filling a defined headcount slot. His tasks are administrative, his value is operational, and his contract ends when the internship period concludes. He is a cost to be managed, not a human to be developed.</p>
+        <p style="margin-top:12px; color:var(--coral); font-style:italic; font-size:12px;">Result: Ben sorts emails and drives colleagues around. His 40 years of experience go untouched.</p>
+      </div>
+    </div>
+    <div class="col-card">
+      <div class="col-card-header" style="background:var(--teal); color:white;">🤝 Human Resource Management</div>
+      <div class="col-card-body">
+        <p style="font-weight:700; color:var(--navy); margin-bottom:10px;">How it sees Ben:</p>
+        <p>A human asset whose wellbeing, skills, and engagement matter. HRM would invest in onboarding him properly, assign a buddy, track his satisfaction, and ensure he feels valued as an individual contributor regardless of age.</p>
+        <p style="margin-top:12px; color:var(--teal); font-style:italic; font-size:12px;">Result: Ben is integrated into team culture and respected. His mentoring emerges organically but informally.</p>
+      </div>
+    </div>
+    <div class="col-card">
+      <div class="col-card-header" style="background:var(--navy); color:var(--gold);">🎯 Strategic HRM (SHRM)</div>
+      <div class="col-card-body">
+        <p style="font-weight:700; color:var(--navy); margin-bottom:10px;">How it sees Ben:</p>
+        <p>A rare source of competitive human capital. SHRM aligns Ben's unique KSAOs with the organisation's strategic gaps, designs a formal role, sets measurable outcomes, and positions him as a culture driver who supports Jules' leadership development.</p>
+        <p style="margin-top:12px; color:var(--navy); font-style:italic; font-size:12px;">Result: The redesigned role you will see in this document. This is the version that creates organisational value.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ SECTION 3 – TITLE EVOLUTION ═══════════════════ -->
+<section style="padding-top:0">
+  <div class="section-label">Section 03</div>
+  <div class="section-title">The Title Evolution Arc</div>
+
+  <div class="insight-callout">
+    <div class="insight-callout-icon">📈</div>
+    <div><strong>Demand Forecasting in Action:</strong> A core HR planning skill is recognising gaps between what the organisation needs and what it currently has. About The Fit was scaling fast. They needed emotional intelligence, executive stability, and cross-generational communication. Ben supplied all of that. But because no HR demand forecast had identified these needs formally, the supply walked in through the back door wearing a briefcase.</div>
+  </div>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-dot dot-coral">1</div>
+      <div class="tl-year">Day 1 through Week 2</div>
+      <div class="tl-title">Senior Intern (Official Title)</div>
+      <div class="tl-desc">Assigned to Jules' office. Tasked with sorting emails and running errands. Treated as a well-meaning but irrelevant relic. His value remains invisible because no job analysis was ever conducted to surface it.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot dot-gold">2</div>
+      <div class="tl-year">Week 3 through Week 6</div>
+      <div class="tl-title">Unofficial Counselor and Desk Anchor</div>
+      <div class="tl-desc">Ben becomes the emotional anchor of his floor. Colleagues approach him for personal advice, conflict resolution, and relationship guidance. He addresses the bag situation, the messy car incident, and the late-night work crisis. None of this was in any job description.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot dot-teal">3</div>
+      <div class="tl-year">Week 7 through Midpoint</div>
+      <div class="tl-title">Shadow COO and Trusted Confidant</div>
+      <div class="tl-desc">Jules begins leaning on Ben for business judgment beyond administrative tasks. He accompanies her to San Francisco and becomes her sounding board on the CEO replacement dilemma, the most strategically significant decision in the entire film.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot dot-navy">4</div>
+      <div class="tl-year">Film's End</div>
+      <div class="tl-title">The Role He Should Have Had: Senior Experience Catalyst</div>
+      <div class="tl-desc">Ben's actual function is to bridge generational divides, stabilise culture, advise leadership, mentor employees, and embody institutional values. A role that does not yet exist formally but absolutely should.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ SECTION 4 – JOB ANALYSIS ═══════════════════ -->
+<section style="padding-top:0">
+  <div class="section-label">Section 04</div>
+  <div class="section-title">Formal Job Analysis: Redesigned Role</div>
+
+  <div class="insight-callout">
+    <div class="insight-callout-icon">🗂️</div>
+    <div><strong>What Job Analysis Reveals:</strong> Job Analysis is the systematic process of collecting information about duties, responsibilities, necessary skills, outcomes, and the work environment of a particular job. Notice the difference between what the job description said (intern) and what a proper job analysis reveals: strategic advisor, culture steward, reverse mentor.</div>
+  </div>
+
+  <div class="role-arch" style="margin-bottom:44px;">
+    <div class="arch-node top">🧠 Senior Experience Catalyst</div>
+    <div class="arch-connector"></div>
+    <div class="arch-row">
+      <div class="arch-branch">
+        <div class="arch-node pillar">🤝 People and Culture</div>
+        <div class="arch-connector" style="height:20px;"></div>
+        <div class="arch-sub-row">
+          <div class="arch-chip">Peer Mentoring</div>
+          <div class="arch-chip">Conflict Mediation</div>
+          <div class="arch-chip">Morale Anchoring</div>
+        </div>
+      </div>
+      <div class="arch-branch">
+        <div class="arch-node pillar">📋 Executive Support</div>
+        <div class="arch-connector" style="height:20px;"></div>
+        <div class="arch-sub-row">
+          <div class="arch-chip">Sounding Board</div>
+          <div class="arch-chip">Shadow Advisory</div>
+          <div class="arch-chip">Leadership Coaching</div>
+        </div>
+      </div>
+      <div class="arch-branch">
+        <div class="arch-node pillar">🔁 Knowledge Transfer</div>
+        <div class="arch-connector" style="height:20px;"></div>
+        <div class="arch-sub-row">
+          <div class="arch-chip">Institutional Memory</div>
+          <div class="arch-chip">Cross-Gen Bridge</div>
+          <div class="arch-chip">Process Wisdom</div>
+        </div>
+      </div>
+      <div class="arch-branch">
+        <div class="arch-node pillar">🌱 Culture Steward</div>
+        <div class="arch-connector" style="height:20px;"></div>
+        <div class="arch-sub-row">
+          <div class="arch-chip">Work Ethic Modeling</div>
+          <div class="arch-chip">Psychological Safety</div>
+          <div class="arch-chip">Professional Standards</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="job-design-grid">
+    <div class="jd-card" data-icon="📌">
+      <h3>Job Title</h3>
+      <p><strong>Senior Experience Catalyst</strong><br>Alternatively: Chief Wisdom Officer, People Anchor, or Generational Intelligence Advisor</p>
+    </div>
+    <div class="jd-card" data-icon="🏢">
+      <h3>Department</h3>
+      <p>Reports to the CEO (Jules Ostin). Cross-functional liaison across People Ops, Product, and the Executive Office.</p>
+    </div>
+    <div class="jd-card" data-icon="📊">
+      <h3>Employment Type</h3>
+      <p>Part-time and flexible. 3 to 4 days per week. On-site preferred with hybrid acceptable. Renewable contract with semi-annual performance review.</p>
+    </div>
+    <div class="jd-card" data-icon="🎯">
+      <h3>Job Purpose</h3>
+      <p>To embed seasoned professional judgment, cross-generational empathy, and emotional steadiness into a high-growth startup ecosystem, bridging lived business experience with modern agile culture.</p>
+    </div>
+    <div class="jd-card" data-icon="🛠">
+      <h3>Core Responsibilities</h3>
+      <ul>
+        <li>Serve as informal executive sounding board for the CEO</li>
+        <li>Mentor employees on professional norms and emotional regulation</li>
+        <li>Mediate interpersonal and cross-team tension</li>
+        <li>Advise on decisions using historical business precedent</li>
+        <li>Model sustained work ethic and professional standards</li>
+        <li>Document institutional learnings and cultural norms</li>
+      </ul>
+    </div>
+    <div class="jd-card" data-icon="🚫">
+      <h3>What This Role Is NOT</h3>
+      <ul>
+        <li>An administrative assistant or errand runner</li>
+        <li>A token diversity hire for optics or PR</li>
+        <li>A technical specialist or product owner</li>
+        <li>A replacement for HR or formal counseling services</li>
+        <li>A passive observer or ceremonial figurehead</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ SECTION 5 – BEFORE / AFTER ═══════════════════ -->
+<section style="padding-top:0">
+  <div class="section-label">Section 05</div>
+  <div class="section-title">Job Redesign: Before and After</div>
+
+  <div class="insight-callout">
+    <div class="insight-callout-icon">✏️</div>
+    <div><strong>Job Design Principles Applied:</strong> Job Design refers to how tasks, responsibilities, and relationships are structured to satisfy both organisational requirements and the personal needs of the job holder. What Ben needed was aggressive <em>job enrichment</em> combined with a complete re-specification. The comparison below shows exactly how each element changes when proper job design principles are applied.</div>
+  </div>
+
+  <div class="ba-grid">
+    <div class="ba-col ba-before">
+      <div class="ba-header">The Old Role: Senior Intern</div>
+      <div class="ba-row"><span class="icon">📎</span>Sorts emails and files documents for Jules</div>
+      <div class="ba-row"><span class="icon">🚗</span>Drives colleagues on personal errands</div>
+      <div class="ba-row"><span class="icon">👁</span>Observes meetings without contributing</div>
+      <div class="ba-row"><span class="icon">📦</span>Handles basic logistics and office tasks</div>
+      <div class="ba-row"><span class="icon">🤷</span>Ambiguous accountability with no clear structure</div>
+      <div class="ba-row"><span class="icon">💰</span>Intern-level stipend if paid at all</div>
+      <div class="ba-row"><span class="icon">🪑</span>Assigned a desk and told to fit in</div>
+      <div class="ba-row"><span class="icon">📉</span>Program treated as corporate social goodwill</div>
+    </div>
+    <div class="ba-arrow">→</div>
+    <div class="ba-col ba-after">
+      <div class="ba-header">The Redesigned Role: Experience Catalyst</div>
+      <div class="ba-row"><span class="icon">🧭</span>Facilitates structured leadership coaching sessions with Jules</div>
+      <div class="ba-row"><span class="icon">🤝</span>Leads cross-generational dialogue workshops for all staff</div>
+      <div class="ba-row"><span class="icon">💡</span>Contributes in strategic meetings as a formal thought partner</div>
+      <div class="ba-row"><span class="icon">📖</span>Documents institutional knowledge into a company Wisdom Playbook</div>
+      <div class="ba-row"><span class="icon">🎯</span>Clear reporting line to CEO with defined scope and KPIs</div>
+      <div class="ba-row"><span class="icon">💵</span>Market-rate part-time professional compensation</div>
+      <div class="ba-row"><span class="icon">🌐</span>Embedded across departments as a cultural anchor</div>
+      <div class="ba-row"><span class="icon">🏆</span>Positioned as a strategic asset and not a goodwill gesture</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ SECTION 6 – KSA MATRIX ═══════════════════ -->
+<section style="padding-top:0">
+  <div class="section-label">Section 06</div>
+  <div class="section-title">Competency Mapping: KSA Matrix</div>
+
+  <div class="insight-callout">
+    <div class="insight-callout-icon">🗺️</div>
+    <div><strong>Making the Invisible Visible:</strong> Competency Mapping identifies the specific skills, knowledge, and behavioural attributes required for a role and assesses whether the current employee possesses them. For Ben, this is particularly interesting because his most valuable competencies are the hardest to quantify. This matrix makes them explicit and measurable for the first time.</div>
+  </div>
+
+  <div class="ksa-grid">
+    <div class="ksa-col">
+      <div class="ksa-header">📚 Knowledge</div>
+      <div class="ksa-item"><div class="ksa-dot dot-k"></div>Corporate governance and business ethics developed over 40 years</div>
+      <div class="ksa-item"><div class="ksa-dot dot-k"></div>Organisational behaviour and change management principles</div>
+      <div class="ksa-item"><div class="ksa-dot dot-k"></div>Crisis communication and executive decision frameworks</div>
+      <div class="ksa-item"><div class="ksa-dot dot-k"></div>Human resource management fundamentals</div>
+      <div class="ksa-item"><div class="ksa-dot dot-k"></div>Cross-industry business models from the pre-digital era</div>
+      <div class="ksa-item"><div class="ksa-dot dot-k"></div>Socio-cultural norms across multiple generations</div>
+      <div class="ksa-item"><div class="ksa-dot dot-k"></div>Leadership succession and executive transition management</div>
+    </div>
+    <div class="ksa-col">
+      <div class="ksa-header">🛠 Skills</div>
+      <div class="ksa-item"><div class="ksa-dot dot-s"></div>Active listening and empathetic communication</div>
+      <div class="ksa-item"><div class="ksa-dot dot-s"></div>Conflict de-escalation and peer mediation</div>
+      <div class="ksa-item"><div class="ksa-dot dot-s"></div>Strategic questioning and Socratic coaching</div>
+      <div class="ksa-item"><div class="ksa-dot dot-s"></div>Written and verbal professional communication</div>
+      <div class="ksa-item"><div class="ksa-dot dot-s"></div>Observational intelligence including reading room dynamics</div>
+      <div class="ksa-item"><div class="ksa-dot dot-s"></div>Time management and self-discipline under ambiguity</div>
+      <div class="ksa-item"><div class="ksa-dot dot-s"></div>Technology adaptation through proactive self-directed learning</div>
+    </div>
+    <div class="ksa-col">
+      <div class="ksa-header">⚡ Abilities</div>
+      <div class="ksa-item"><div class="ksa-dot dot-a"></div>Earn trust rapidly across generational and cultural divides</div>
+      <div class="ksa-item"><div class="ksa-dot dot-a"></div>Maintain composure in high-stakes emotional situations</div>
+      <div class="ksa-item"><div class="ksa-dot dot-a"></div>Translate complex experience into practical everyday wisdom</div>
+      <div class="ksa-item"><div class="ksa-dot dot-a"></div>Adapt communication style to diverse audiences effortlessly</div>
+      <div class="ksa-item"><div class="ksa-dot dot-a"></div>Hold space for others without imposing personal judgment</div>
+      <div class="ksa-item"><div class="ksa-dot dot-a"></div>Navigate ambiguous authority structures with grace and clarity</div>
+      <div class="ksa-item"><div class="ksa-dot dot-a"></div>Model psychological safety through behaviour rather than directives</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ SECTION 7 – RECRUITMENT ═══════════════════ -->
+<section style="padding-top:0">
+  <div class="section-label">Section 07</div>
+  <div class="section-title">How Would You Have Recruited Ben?</div>
+
+  <div class="insight-callout">
+    <div class="insight-callout-icon">📣</div>
+    <div><strong>Sourcing, Branding, and the Algorithm Problem:</strong> Ben found About The Fit through a flyer at a community centre. That is about as informal as recruitment gets. But imagine a world where this role was properly designed first and then actively recruited for. How would the sourcing strategy, assessment tools, and employer branding change?</div>
+  </div>
+
+  <div class="two-col-grid" style="margin-bottom:20px;">
+    <div style="background:white; border-radius:14px; overflow:hidden; box-shadow:0 4px 20px rgba(0,0,0,0.08);">
+      <div style="background:var(--gold); color:var(--navy); padding:14px 18px; font-weight:700; font-size:12px; text-transform:uppercase; letter-spacing:1.5px;">🎯 Ideal Sourcing Strategy</div>
+      <div class="table-wrap">
+        <table style="width:100%; border-collapse:collapse; font-size:13px; color:#444;">
+          <tr style="border-bottom:1px solid #f0f0f0; background:#fafafa;">
+            <td style="padding:10px 14px; font-weight:600; color:var(--navy); width:40%;">Source</td>
+            <td style="padding:10px 14px;">Application for Ben's Role</td>
+          </tr>
+          <tr style="border-bottom:1px solid #f0f0f0;">
+            <td style="padding:10px 14px; font-weight:600;">AARP Job Board</td>
+            <td style="padding:10px 14px;">Targets experienced professionals aged 50 and above looking to re-enter</td>
+          </tr>
+          <tr style="border-bottom:1px solid #f0f0f0;">
+            <td style="padding:10px 14px; font-weight:600;">LinkedIn Alumni Networks</td>
+            <td style="padding:10px 14px;">Mid-century business school alumni with cross-industry executive exposure</td>
+          </tr>
+          <tr style="border-bottom:1px solid #f0f0f0;">
+            <td style="padding:10px 14px; font-weight:600;">Retired Executive Panels</td>
+            <td style="padding:10px 14px;">Curated databases of retired VPs available for advisory roles</td>
+          </tr>
+          <tr>
+            <td style="padding:10px 14px; font-weight:600;">Employee Referrals</td>
+            <td style="padding:10px 14px;">Asking current employees who they admire outside the organisation</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div style="background:white; border-radius:14px; overflow:hidden; box-shadow:0 4px 20px rgba(0,0,0,0.08);">
+      <div style="background:var(--navy); color:var(--gold); padding:14px 18px; font-weight:700; font-size:12px; text-transform:uppercase; letter-spacing:1.5px;">🤖 AI in Recruitment: The Irony</div>
+      <div style="padding:18px; font-size:13px; color:#555; line-height:1.8;">
+        <p style="margin-bottom:12px;">Most AI-driven Applicant Tracking Systems (ATS) would have <strong style="color:var(--coral);">automatically rejected Ben's application</strong>. Why?</p>
+        <p style="margin-bottom:12px;">His most recent role was from a company that no longer exists. His skills — wisdom, empathy, institutional knowledge — do not appear in keyword searches. His "gap year" was actually 13 years of retirement.</p>
+        <p>This is a real-world critique: AI in recruitment optimises for pattern-matching, not for the kind of human value Ben represents. A thoughtful recruiter adds the judgment that an algorithm cannot replicate.</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="background:white; border-radius:14px; overflow:hidden; box-shadow:0 4px 20px rgba(0,0,0,0.08);">
+    <div style="background:linear-gradient(90deg,var(--teal),#1a6575); color:white; padding:14px 18px; font-weight:700; font-size:12px; text-transform:uppercase; letter-spacing:1.5px;">🏷️ Employer Branding: The Promise vs The Reality</div>
+    <div class="three-col-grid" style="border-radius:0;">
+      <div style="padding:18px; border-right:1px solid #f0f0f0;">
+        <p style="font-weight:700; color:var(--navy); margin-bottom:8px; font-size:13px;">The Promise They Made</p>
+        <p style="font-size:13px; color:#555; line-height:1.7;">About The Fit marketed itself as innovative and inclusive. The Senior Intern program was their employer branding statement: "We welcome everyone, even a 70-year-old."</p>
+      </div>
+      <div style="padding:18px; border-right:1px solid #f0f0f0;">
+        <p style="font-weight:700; color:var(--navy); margin-bottom:8px; font-size:13px;">The Reality Gap</p>
+        <p style="font-size:13px; color:#555; line-height:1.7;">Ben was initially ignored, assigned busywork, and excluded from conversations he could have meaningfully shaped. The employer brand promised inclusion but the HRM system delivered tokenism.</p>
+      </div>
+      <div style="padding:18px;">
+        <p style="font-weight:700; color:var(--navy); margin-bottom:8px; font-size:13px;">The Lesson</p>
+        <p style="font-size:13px; color:#555; line-height:1.7;">An HR professional's job is to close the gap between the employer brand promise and the lived employee experience. Without proper job design and talent integration, even the best branding becomes dishonest.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ SECTION 8 – SELECTION ═══════════════════ -->
+<section style="padding-top:0">
+  <div class="section-label">Section 08</div>
+  <div class="section-title">Selection Process and Assessment Tools</div>
+
+  <div class="insight-callout">
+    <div class="insight-callout-icon">🧪</div>
+    <div><strong>Selecting for Wisdom, Not Keywords:</strong> For Ben's redesigned role, traditional selection tools like technical tests are largely irrelevant. What matters is assessing wisdom, trust-building, and emotional intelligence. Below is a custom selection framework designed around what this role actually requires.</div>
+  </div>
+
+  <div class="table-wrap">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Selection Stage</th>
+          <th>Assessment Tool</th>
+          <th>What It Measures</th>
+          <th>Weighting</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Stage 1: Screening</strong></td>
+          <td>Narrative CV Review (not ATS keyword filter)</td>
+          <td>Career breadth, leadership exposure, and cross-functional roles over decades</td>
+          <td><span class="pill pill-blue">15%</span></td>
+        </tr>
+        <tr>
+          <td><strong>Stage 2: Structured Interview</strong></td>
+          <td>Behavioural Interview using STAR method</td>
+          <td>How the candidate has navigated conflict, supported others, and demonstrated patience under pressure</td>
+          <td><span class="pill pill-blue">30%</span></td>
+        </tr>
+        <tr>
+          <td><strong>Stage 3: Situational Test</strong></td>
+          <td>Role-play scenario involving a stressed junior employee</td>
+          <td>Active listening quality, emotional regulation, advice quality, and boundaries maintained</td>
+          <td><span class="pill pill-green">25%</span></td>
+        </tr>
+        <tr>
+          <td><strong>Stage 4: Personality Assessment</strong></td>
+          <td>Big Five (focus: Agreeableness, Openness, Conscientiousness)</td>
+          <td>Cultural adaptability, warmth, diligence, and openness to learning in a new environment</td>
+          <td><span class="pill pill-amber">15%</span></td>
+        </tr>
+        <tr>
+          <td><strong>Stage 5: Reference Check</strong></td>
+          <td>360-degree references from former reports, peers, and superiors</td>
+          <td>Consistency of character, actual impact on others, trustworthiness across all levels</td>
+          <td><span class="pill pill-green">15%</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ═══════════════════ SECTION 9 – COMPETENCY PROFILE + TNA ═══════════════════ -->
+<section style="padding-top:0">
+  <div class="section-label">Section 09</div>
+  <div class="section-title">Competency Profile and Training Needs Analysis</div>
+
+  <div class="insight-callout">
+    <div class="insight-callout-icon">📡</div>
+    <div><strong>TNA Works in Two Directions:</strong> Before designing any training programme, a Training Needs Analysis identifies the gap between current competencies and those required for optimal performance. For Ben, the twist is that the TNA works both ways. Ben himself has developmental needs (primarily technology literacy). But the organisation also needs training that Ben himself can deliver to others.</div>
+  </div>
+
+  <div class="radar-wrapper">
+    <div class="radar-svg-wrap">
+      <svg viewBox="0 0 300 300" width="100%" height="auto" style="max-width:300px; overflow:visible;">
+        <circle cx="150" cy="150" r="120" fill="none" stroke="#eee" stroke-width="1"/>
+        <circle cx="150" cy="150" r="90" fill="none" stroke="#eee" stroke-width="1"/>
+        <circle cx="150" cy="150" r="60" fill="none" stroke="#eee" stroke-width="1"/>
+        <circle cx="150" cy="150" r="30" fill="none" stroke="#eee" stroke-width="1"/>
+        <line x1="150" y1="30" x2="150" y2="270" stroke="#ddd" stroke-width="1"/>
+        <line x1="30" y1="150" x2="270" y2="150" stroke="#ddd" stroke-width="1"/>
+        <line x1="65" y1="65" x2="235" y2="235" stroke="#ddd" stroke-width="1"/>
+        <line x1="235" y1="65" x2="65" y2="235" stroke="#ddd" stroke-width="1"/>
+        <polygon
+          points="150,36 233,67 258,150 228,228 150,236 75,225 78,150 69,69"
+          fill="rgba(45,125,140,0.2)"
+          stroke="#2d7d8c"
+          stroke-width="2"
+        />
+        <text x="150" y="24" text-anchor="middle" font-size="11" font-family="Inter" fill="#444" font-weight="600">EQ</text>
+        <text x="246" y="58" text-anchor="start" font-size="11" font-family="Inter" fill="#444" font-weight="600">Wisdom</text>
+        <text x="270" y="154" text-anchor="start" font-size="11" font-family="Inter" fill="#444" font-weight="600">Comm.</text>
+        <text x="238" y="240" text-anchor="start" font-size="11" font-family="Inter" fill="#444" font-weight="600">Trust</text>
+        <text x="150" y="260" text-anchor="middle" font-size="11" font-family="Inter" fill="#444" font-weight="600">Adaptability</text>
+        <text x="54" y="240" text-anchor="end" font-size="11" font-family="Inter" fill="#444" font-weight="600">Leadership</text>
+        <text x="60" y="154" text-anchor="end" font-size="11" font-family="Inter" fill="#444" font-weight="600">Tech</text>
+        <text x="54" y="58" text-anchor="end" font-size="11" font-family="Inter" fill="#444" font-weight="600">Resilience</text>
+        <circle cx="150" cy="150" r="4" fill="#c9a84c"/>
+      </svg>
+    </div>
+
+    <div class="competency-bars">
+      <div style="font-size:12px; color:#888; margin-bottom:4px;">Score out of 100 · ⚠️ marks indicate TNA development gaps</div>
+      <div class="comp-bar-row">
+        <div class="comp-bar-label"><span>🧠 Emotional Intelligence</span><span>95</span></div>
+        <div class="comp-bar-track"><div class="comp-bar-fill" style="width:95%"></div></div>
+      </div>
+      <div class="comp-bar-row">
+        <div class="comp-bar-label"><span>📖 Institutional Wisdom</span><span>98</span></div>
+        <div class="comp-bar-track"><div class="comp-bar-fill" style="width:98%"></div></div>
+      </div>
+      <div class="comp-bar-row">
+        <div class="comp-bar-label"><span>💬 Communication</span><span>90</span></div>
+        <div class="comp-bar-track"><div class="comp-bar-fill" style="width:90%"></div></div>
+      </div>
+      <div class="comp-bar-row">
+        <div class="comp-bar-label"><span>🤝 Trust-Building</span><span>92</span></div>
+        <div class="comp-bar-track"><div class="comp-bar-fill" style="width:92%"></div></div>
+      </div>
+      <div class="comp-bar-row">
+        <div class="comp-bar-label"><span>🔄 Adaptability</span><span>72</span></div>
+        <div class="comp-bar-track"><div class="comp-bar-fill" style="width:72%"></div></div>
+      </div>
+      <div class="comp-bar-row">
+        <div class="comp-bar-label"><span>🎖 Leadership Presence</span><span>88</span></div>
+        <div class="comp-bar-track"><div class="comp-bar-fill" style="width:88%"></div></div>
+      </div>
+      <div class="comp-bar-row">
+        <div class="comp-bar-label"><span>💻 Tech Literacy ⚠️</span><span>60</span></div>
+        <div class="comp-bar-track"><div class="comp-bar-fill" style="width:60%; background: linear-gradient(90deg,#e07b5a,#e0c45a)"></div></div>
+      </div>
+      <div class="comp-bar-row">
+        <div class="comp-bar-label"><span>🧗 Resilience</span><span>96</span></div>
+        <div class="comp-bar-track"><div class="comp-bar-fill" style="width:96%"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ SECTION 10 – TRAINING & DEVELOPMENT ═══════════════════ -->
+<section style="padding-top:0">
+  <div class="section-label">Section 10</div>
+  <div class="section-title">Training Methods and Development Plan</div>
+
+  <div class="insight-callout">
+    <div class="insight-callout-icon">🎓</div>
+    <div><strong>Learning Goes Both Ways:</strong> A Learning Organisation continuously facilitates the learning of its members and transforms itself. Rather than treating development as a one-way street (organisation trains employee), this plan is bidirectional. Ben develops new skills while the organisation develops itself by deliberately learning from Ben.</div>
+  </div>
+
+  <div class="two-col-grid" style="margin-bottom:28px;">
+    <div style="background:white; border-radius:14px; overflow:hidden; box-shadow:0 4px 20px rgba(0,0,0,0.08);">
+      <div style="background:var(--coral); color:white; padding:13px 18px; font-weight:700; font-size:12px; text-transform:uppercase; letter-spacing:1px;">Ben's Personal Development Plan</div>
+      <div class="table-wrap">
+        <table style="width:100%; border-collapse:collapse; font-size:13px; color:#444;">
+          <tr style="background:#fafafa;">
+            <td style="padding:11px 14px; font-weight:600; border-bottom:1px solid #f0f0f0; color:var(--navy);">Skill Gap</td>
+            <td style="padding:11px 14px; font-weight:600; border-bottom:1px solid #f0f0f0; color:var(--navy);">Training Method</td>
+            <td style="padding:11px 14px; font-weight:600; border-bottom:1px solid #f0f0f0; color:var(--navy); white-space:nowrap;">Timeline</td>
+          </tr>
+          <tr style="border-bottom:1px solid #f0f0f0;">
+            <td style="padding:11px 14px;">Tech Literacy (Slack, Notion, Zoom)</td>
+            <td style="padding:11px 14px;">Buddy pairing with a junior colleague through reverse mentoring</td>
+            <td style="padding:11px 14px;"><span class="pill pill-amber">4 weeks</span></td>
+          </tr>
+          <tr style="border-bottom:1px solid #f0f0f0;">
+            <td style="padding:11px 14px;">Startup Culture Fluency</td>
+            <td style="padding:11px 14px;">Immersive shadowing of product and engineering team standups</td>
+            <td style="padding:11px 14px;"><span class="pill pill-amber">Ongoing</span></td>
+          </tr>
+          <tr style="border-bottom:1px solid #f0f0f0;">
+            <td style="padding:11px 14px;">E-commerce Business Model</td>
+            <td style="padding:11px 14px;">Self-directed e-learning modules on the company's internal LMS</td>
+            <td style="padding:11px 14px;"><span class="pill pill-blue">6 weeks</span></td>
+          </tr>
+          <tr>
+            <td style="padding:11px 14px;">Facilitation Skills for Workshops</td>
+            <td style="padding:11px 14px;">Classroom coaching on facilitation techniques and group dynamics</td>
+            <td style="padding:11px 14px;"><span class="pill pill-blue">2 days</span></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div style="background:white; border-radius:14px; overflow:hidden; box-shadow:0 4px 20px rgba(0,0,0,0.08);">
+      <div style="background:var(--navy); color:var(--gold); padding:13px 18px; font-weight:700; font-size:12px; text-transform:uppercase; letter-spacing:1px;">What the Organisation Learns FROM Ben</div>
+      <div class="table-wrap">
+        <table style="width:100%; border-collapse:collapse; font-size:13px; color:#444;">
+          <tr style="background:#fafafa;">
+            <td style="padding:11px 14px; font-weight:600; border-bottom:1px solid #f0f0f0; color:var(--navy);">Learning Outcome</td>
+            <td style="padding:11px 14px; font-weight:600; border-bottom:1px solid #f0f0f0; color:var(--navy);">Delivery Format</td>
+          </tr>
+          <tr style="border-bottom:1px solid #f0f0f0;">
+            <td style="padding:11px 14px;">Long-term thinking and patience in decision-making</td>
+            <td style="padding:11px 14px;">Monthly "Wisdom Session" open to all staff</td>
+          </tr>
+          <tr style="border-bottom:1px solid #f0f0f0;">
+            <td style="padding:11px 14px;">Professional etiquette and workplace norms</td>
+            <td style="padding:11px 14px;">Informal peer learning through daily interaction</td>
+          </tr>
+          <tr style="border-bottom:1px solid #f0f0f0;">
+            <td style="padding:11px 14px;">Navigating leadership under personal stress</td>
+            <td style="padding:11px 14px;">Documented playbook entries from advisory sessions with Jules</td>
+          </tr>
+          <tr>
+            <td style="padding:11px 14px;">Cross-generational empathy and communication</td>
+            <td style="padding:11px 14px;">Facilitated workshops and lunch-and-learn sessions</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <p style="color:#666; font-size:13px; margin-bottom:18px; max-width:720px; line-height:1.7;">The schedule below shows how training and development activity is woven into Ben's daily rhythm rather than siloed into a separate programme. This reflects the continuous learning philosophy of a true Learning Organisation.</p>
+
+  <div class="schedule">
+    <div class="sch-time">8:00 AM</div>
+    <div class="sch-task"><span class="sch-badge pill pill-blue">Routine</span> Arrives first as always. Reviews overnight emails flagged by Jules. Sets the professional tone for the day.</div>
+    <div class="sch-time">8:30 AM</div>
+    <div class="sch-task"><span class="sch-badge pill pill-green">Culture</span> Coffee Circle: an informal 20-minute open-door session where any employee can talk, vent, or ideate freely with Ben.</div>
+    <div class="sch-time">10:00 AM</div>
+    <div class="sch-task"><span class="sch-badge pill pill-amber">Advisory</span> Weekly one-on-one with Jules as strategic sounding board. Ben listens 80% of the time and reflects 20%. No fixed agenda.</div>
+    <div class="sch-time">11:30 AM</div>
+    <div class="sch-task"><span class="sch-badge pill pill-blue">Mentoring</span> Structured mentoring session with one or two junior employees on professional development and goal-setting.</div>
+    <div class="sch-time">1:00 PM</div>
+    <div class="sch-task"><span class="sch-badge pill pill-green">Culture</span> Eats lunch with a different team each week. No agenda, purely organic relationship-building and knowledge transfer.</div>
+    <div class="sch-time">2:30 PM</div>
+    <div class="sch-task"><span class="sch-badge pill pill-amber">Knowledge</span> Documents one Wisdom Entry per day drawn from his 40 years of experience. Compiled into the company Playbook.</div>
+    <div class="sch-time">4:00 PM</div>
+    <div class="sch-task"><span class="sch-badge pill pill-blue">Workshops</span> Bi-weekly: facilitates a cross-generational dialogue workshop between senior leadership and junior staff.</div>
+    <div class="sch-time">5:30 PM</div>
+    <div class="sch-task"><span class="sch-badge pill pill-green">Observation</span> Walk-and-observe. Notes team morale, interpersonal energy, and tension. Brief summary shared with Jules weekly.</div>
+  </div>
+</section>
+
+<!-- ═══════════════════ SECTION 11 – KPI SCOREBOARD ═══════════════════ -->
+<section style="padding-top:0">
+  <div class="section-label">Section 11</div>
+  <div class="section-title">Performance Metrics and KPI Scoreboard</div>
+
+  <div class="insight-callout">
+    <div class="insight-callout-icon">📊</div>
+    <div><strong>Measuring What Actually Matters:</strong> Traditional performance metrics — sales targets, project deliverables — were never the point of this role. These KPIs are designed to capture intangible but measurable cultural and strategic value: the things Ben actually delivers that no ATS would have predicted.</div>
+  </div>
+
+  <div class="metrics-board">
+    <div class="metric-card">
+      <div class="metric-icon">🤝</div>
+      <div class="metric-val">+28%</div>
+      <div class="metric-label">Mentee Satisfaction Score</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-icon">💬</div>
+      <div class="metric-val">40% ↓</div>
+      <div class="metric-label">HR Conflict Escalations</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-icon">📚</div>
+      <div class="metric-val">52</div>
+      <div class="metric-label">Wisdom Entries Per Year</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-icon">🧭</div>
+      <div class="metric-val">96%</div>
+      <div class="metric-label">CEO Trust Rating</div>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>KPI</th>
+          <th>Measurement Method</th>
+          <th>Target</th>
+          <th>Ben's Score</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Employee Trust Index</td>
+          <td>Anonymous pulse survey asking whether employees feel they can approach Ben</td>
+          <td>Above 85%</td>
+          <td><span class="pill pill-green">94%</span></td>
+        </tr>
+        <tr>
+          <td>Mentoring Completion Rate</td>
+          <td>Number of sessions completed compared to those assigned</td>
+          <td>Above 90%</td>
+          <td><span class="pill pill-green">100%</span></td>
+        </tr>
+        <tr>
+          <td>Culture Health Score</td>
+          <td>eNPS trends in teams where Ben is active versus teams where he is not</td>
+          <td>10 pts above baseline</td>
+          <td><span class="pill pill-green">+17 pts</span></td>
+        </tr>
+        <tr>
+          <td>Knowledge Artefacts Created</td>
+          <td>Number of documented playbook entries and frameworks produced monthly</td>
+          <td>4 or more per month</td>
+          <td><span class="pill pill-amber">3 to 4 per month</span></td>
+        </tr>
+        <tr>
+          <td>CEO Decision Confidence Score</td>
+          <td>Jules' self-rated confidence level following sounding-board sessions</td>
+          <td>Above 80%</td>
+          <td><span class="pill pill-green">92%</span></td>
+        </tr>
+        <tr>
+          <td>Tech Literacy Progress</td>
+          <td>Completion of digital onboarding modules and self-assessment results</td>
+          <td>70 out of 100 by Month 3</td>
+          <td><span class="pill pill-amber">64 and improving</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ═══════════════════ SECTION 12 – THE BIGGER IDEA ═══════════════════ -->
+<section style="padding-top:0; padding-bottom:80px;">
+  <div class="section-label">Section 12</div>
+  <div class="section-title">What Ben Teaches Us About HRM</div>
+
+  <div class="two-col-grid span-last">
+    <div class="insight-card" style="background:linear-gradient(135deg,#1a2744,#2d4a6e);">
+      <div class="insight-card-bg">🏛️</div>
+      <div class="insight-card-eyebrow">HRM Without Ethics</div>
+      <h3 style="color:var(--gold);">HRM Without Ethics Is Just Administration</h3>
+      <p>About The Fit's Senior Intern programme was well-intentioned but ethically incomplete. True SHRM requires asking whether HR practices respect human dignity, maximise human potential, and avoid tokenism. Ben's near-wasted talent is a lesson in what happens when organisations prioritise optics over genuine inclusion.</p>
+    </div>
+
+    <div class="insight-card" style="background:linear-gradient(135deg,#2d7d8c,#1a6575);">
+      <div class="insight-card-bg">🗂️</div>
+      <div class="insight-card-eyebrow">Job Analysis as Strategy</div>
+      <h3>Job Analysis Is Not Paperwork. It Is Strategy.</h3>
+      <p>If About The Fit had conducted a proper job analysis before placing Ben, they would have designed a role that matched his actual capabilities to their actual organisational needs. The gap between what Ben was asked to do and what he actually contributed is exactly the gap that good job design closes.</p>
+    </div>
+
+    <div class="insight-card" style="background:linear-gradient(135deg,#b8882a,#c9a84c);">
+      <div class="insight-card-bg">🤖</div>
+      <div class="insight-card-eyebrow">Recruitment Limits</div>
+      <h3>AI Can Screen Candidates. It Cannot See Wisdom.</h3>
+      <p>Modern recruitment technology would have rejected Ben at the screening stage. His career gaps, old-world job titles, and absence of buzzwords would have filtered him out instantly. Knowing when to override the algorithm and apply human judgment is one of the most critical skills in HR today.</p>
+    </div>
+
+    <div class="insight-card" style="background:linear-gradient(135deg,#b03a42,#d0525a);">
+      <div class="insight-card-bg">🔄</div>
+      <div class="insight-card-eyebrow">Learning Organisations</div>
+      <h3>Learning Goes Both Ways in a True Learning Organisation</h3>
+      <p>Most L&amp;D frameworks assume the organisation develops the employee. Ben's case shows the reverse: the employee can develop the organisation. About The Fit became more emotionally intelligent, more patient, and more self-aware because of Ben. That is what a true Learning Organisation looks like.</p>
+    </div>
+
+    <div style="background:white; border:2px solid var(--gold); border-radius:16px; padding:32px; position:relative; overflow:hidden;">
+      <div style="position:absolute;right:20px;top:20px;font-size:56px;opacity:0.07;">💼</div>
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;">The Takeaway</div>
+      <h3 style="font-family:'Playfair Display',serif;font-size:22px;margin-bottom:12px;color:var(--navy);line-height:1.3;">Job Analysis Is Not Just About Tasks. It Is About Recognising All Forms of Human Value.</h3>
+      <p style="font-size:13px;line-height:1.9;color:#555;">Traditional job analysis frameworks were built for roles that produce measurable outputs. Ben's role produces something harder to quantify: trust, psychological safety, institutional continuity, and cross-generational cohesion. Ben Whittaker deserved a role with a real title, real metrics, and real recognition. And so do millions of people like him in organisations around the world.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<div class="doc-footer">
+  <strong>Job Redesign &amp; Analysis</strong> · Ben Whittaker · Senior Experience Catalyst · About The Fit, Inc.<br>
+  Based on "The Intern" (2015) · Directed by Nancy Meyers · Starring Robert De Niro and Anne Hathaway<br>
+  <span style="opacity:0.4; font-size:10px; margin-top:8px; display:block;">MADE BY: ANUJ PANDEY 25MB0016</span>
+</div>
+
+</body>
+</html>
